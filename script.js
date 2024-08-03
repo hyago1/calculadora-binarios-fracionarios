@@ -70,6 +70,7 @@ function calcFracional2(num2) {
 
 
 function calcular() {
+    console.log("tem , "+ numm(1).indexOf(","));
     
 
     calcDecimal((numm(1).substring(0, numm(1).indexOf(","))))
