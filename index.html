@@ -4,6 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <title>1010101</title>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -35,16 +38,36 @@
 
     </div>
     <div class="info" id="info">
+
         <div class="divInfoPassos">
             <span id="numero1Decimal"></span>
             <span id="numero2Decimal"></span>
+            <span id="resultadoDecimal"></span>
         </div>
+        <fieldset>
+
+            <legend>Clique e veja seus respectivos calculos para IEEE754</legend>
+
+            <div>
+                <input type="button" id="n2" name="drone" onclick="calcIeee754N1()" value="Valor 1" />
+
+            </div>
+
+            <div>
+                <input type="button" id="n1" name="drone" onclick="calcIeee754N2()" value="Valor 2" />
+            </div>
+
+            <div>
+                <input type="button" id="resultado" name="drone" onclick="calcIeee754Resultado()"  value="Resultado" />
+            </div>
+        </fieldset>
+
         <div class="calcIeee754">
             <h3>Passos para calculo do valor 1 para IEEE 754 (Precisão Simples)
             </h3>
 
             <div class="divInfoPassos">
-                <h3>Normalizar o Número:</h3>
+                <h3>1. Normalizar o Número:</h3>
                 <p>Forma normalizada: Mova o ponto decimal até que haja um único dígito não zero à esquerda:
                 </p>
                 <ul>
@@ -55,14 +78,14 @@
                 <br>
             </div>
             <div class="divInfoPassos">
-                <h3> Determinar o Bit de Sinal:</h3>
+                <h3>2. Determinar o Bit de Sinal:</h3>
                 <ul>
                     <li id="bit"></li>
                 </ul>
 
             </div>
             <div class="divInfoPassos">
-                <h3>Calcular o expoente</h3>
+                <h3>3. Calcular o expoente</h3>
                 <ul>
                     <li id="exp"></li>
                     <li id="expBin"></li>
@@ -70,7 +93,7 @@
 
             </div>
             <div class="divInfoPassos">
-                <h3>Determinar a Mantissa:</h3>
+                <h3>4. Determinar a Mantissa:</h3>
                 <ul>
                     <li id="fracBinNorm"></li>
                     <p>Preencha com zeros a direita caso a parte fracionada nao tiver 23 bits</p>
@@ -80,17 +103,17 @@
             </div>
 
             <div class="divInfoPassos">
-                <h3>Juntar Tudo</h3>
+                <h3>5. Juntar Tudo</h3>
                 <p>Combine os componentes</p>
                 <ul>
                     <li>Sinal</li>
                     <li>Expoente</li>
                     <li>Mantissa</li>
                 </ul>
-<h3>O Valor 1 em IEEE754 Com precisao simples:</h3>
+                <h3>O Valor em IEEE754 Com precisao simples:</h3>
                 <p id="resultadoIeee754"></p>
             </div>
-        
+
         </div>
 
 
