@@ -2,7 +2,7 @@ body{
     background-color: rgb(71, 70, 70);
     display: flex;
     justify-content: center;
-    flex-direction: column;
+
     align-items: center;
     margin: 0px;
     padding: 0px;
@@ -38,7 +38,21 @@ select{
    align-items: center;
 
     flex-direction: column;
-    width: 30%;
+    width: 100%;
+}
+.info{
+    display: none;
+    width: 40%;
+    background-color: rgb(61, 61, 61);
+    height: 80%;
+    border-radius: 8px;
+    padding: 5px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+ overflow-y: auto;
+}
+ul{
+ margin: 0px;
+    padding-left: 20px;
 }
 .btnCalc{
     padding: 15px;  
@@ -53,7 +67,42 @@ select{
     background-color: rgb(143, 143, 143);
 width: 81%;
 }
+.calcIeee754{
+    display: flex;
+    flex-direction: column;
 
+}
+.calcIeee754 span{
+    font-size: 12px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;  
+}
+.calc{
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 50%;
+    margin: 20px;
+
+}
+.divInfoPassos{
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(87, 86, 86);
+    padding: 2px;
+    margin: 2px;
+}
+span{
+    padding: 5px;
+    background-color: grey;
+    margin: 2px;
+    border-radius: 15px;
+}
+#numero1Decimal , #numero2Decimal{
+    padding: 2px;
+    font-size: 12px;
+}
 
 @media only screen and (max-width: 600px) {
 .main{

@@ -7,6 +7,18 @@ var valorFracionalB = 0;
 var valorDecimal2B = 0;
 var valorFracional2B = 0;
 
+var ieee754;
+
+function clean() {
+    valorDecimal = 0;
+    valorFracional = 0;
+    valorDecimal2 = 0;
+    valorFracional2 = 0;
+    valorDecimalB = 0;
+    valorFracionalB = 0;
+    valorDecimal2B = 0;
+    valorFracional2B = 0;
+}
 function numm(num) {
     var value;
     if (num == 1) {
@@ -42,9 +54,9 @@ function calcFracional(num1) {
         expoente -= 1;
     }
     console.log(valorFracional);
-    
 
- 
+
+
 }
 
 function calcDecimal2(num2) {
@@ -54,8 +66,8 @@ function calcDecimal2(num2) {
         valorDecimal2 += parseInt(num2.charAt(i) * (2 ** expoente2))
         expoente2 -= 1;
     }
-    }
-    
+}
+
 function calcFracional2(num2) {
 
     var expoente = -1
@@ -64,57 +76,158 @@ function calcFracional2(num2) {
         console.log("espoente" + expoente);
         valorFracional2 += parseFloat(num2.charAt(i) * (2 ** expoente))
         expoente -= 1;
-    }
- 
-}
-
-
-function calcular() {
-    console.log("tem , "+ numm(1).indexOf(","));
+    }console.log(valorFracional2);
     
 
-    calcDecimal((numm(1).substring(0, numm(1).indexOf(","))))
-    calcDecimal2((numm(2).substring(0, numm(2).indexOf(","))))
-    calcFracional(numm(1).substring(numm(1).length,numm(1).indexOf(",")+1))
-    calcFracional2(numm(2).substring(numm(2).length,numm(2).indexOf(",")+1))
-console.log(numm(1).substring(numm(1).length,numm(1).indexOf(",")+1));
-
-console.log("d"+valorDecimal);
-console.log("f"+valorFracional);
-console.log((valorDecimal + valorFracional));
-console.log((valorDecimal2 + valorFracional2));
-let op = document.getElementById("op")
-if (op.value == "somar") {
-    var resultado = (valorDecimal + valorFracional)+(valorDecimal2+valorFracional2)
-}else if (op.value == "subtrair") {
-    var resultado = (valorDecimal + valorFracional)-(valorDecimal2+valorFracional2)
-} else {
-    var resultado = (valorDecimal + valorFracional)*(valorDecimal2+valorFracional2)
 }
-  
+
+function numDecimal(num) {
+
+    if (numm(1).indexOf(".") != -1) {
+        clean()
+        let spanDec = document.getElementById("numero1Decimal")
+        calcDecimal((numm(1).substring(0, numm(1).indexOf("."))))
+        calcFracional(numm(1).substring(numm(1).length, numm(1).indexOf(".") + 1))
+        var calculo = valorDecimal + valorFracional
+        spanDec.textContent = "Valor 1 - decimal: " + calculo.toString()
+    }
+
+
+}
+function numDecimal2(num) {
+  clean()
+    let spanDec = document.getElementById("numero2Decimal")
+    calcDecimal2((numm(2).substring(0, numm(2).indexOf("."))))
+    calcFracional2(numm(2).substring(numm(2).length, numm(2).indexOf(".") + 1))
+    var calculo = valorDecimal2 + valorFracional2
+    console.log(calculo);
+    spanDec.textContent = "Valor 2 - decimal: " + calculo   
+}
+function calcular() {
+   
+
+
+
+    if (numm(1) != "" || numm(2) != "") {
+
+        var info = document.getElementById("info")
+info.style.display = "block"
+info.style.animationDuration = "1s"
+        console.log("tem , " + numm(1).indexOf(","));
+        clean()
+
+    calcDecimal((numm(1).substring(0, numm(1).indexOf("."))))
+    calcDecimal2((numm(2).substring(0, numm(2).indexOf("."))))
+    calcFracional(numm(1).substring(numm(1).length, numm(1).indexOf(".") + 1))
+    calcFracional2(numm(2).substring(numm(2).length, numm(2).indexOf(".") + 1))
+    console.log(numm(1).substring(numm(1).length, numm(1).indexOf(".") + 1));
+
+    console.log("d" + valorDecimal);
+    console.log("f" + valorFracional);
+    console.log((valorDecimal + valorFracional));
+    console.log((valorDecimal2 + valorFracional2));
+    let op = document.getElementById("op")
+    if (op.value == "somar") {
+        var resultado = (valorDecimal + valorFracional) + (valorDecimal2 + valorFracional2)
+    } else if (op.value == "subtrair") {
+        var resultado = (valorDecimal + valorFracional) - (valorDecimal2 + valorFracional2)
+    } else {
+        var resultado = (valorDecimal + valorFracional) * (valorDecimal2 + valorFracional2)
+    }
+
 
 
 
     console.log(resultado);
-    
+
     var stringResultado = resultado.toString(2)
-    
-document.getElementById("resultado").textContent = stringResultado 
 
+    // document.getElementById("resultado").textContent = stringResultado 
+    document.getElementById("resultado").textContent = `${stringResultado}`
 
- valorDecimal = 0;
-valorFracional = 0;
- valorDecimal2 = 0;
- valorFracional2 = 0;
-  valorDecimalB = 0;
-  valorFracionalB = 0;
-valorDecimal2B = 0;
-valorFracional2B = 0;
 
     
+    calcIeee754()
+
+    }else{
+        alert("Digite os valores")
+    }
+   
+
+
 
 }
 
+function calcIeee754() {
+    var expoente1 = (numm(1).indexOf(".") - 1)
+    var expoente2 = (numm(2).indexOf(".") - 1)
+    var  num1 = numm(1).replace('.', '')
+    console.log(num1);
+    
+    document.getElementById("bin").innerHTML = `Binario: ${numm(1)}`
+    var binNormalizado = numm(1).charAt(0) + "." + num1.substring(1, num1.length)
+    document.getElementById("binNormalizado").innerHTML = `Binario Normalizado : ${binNormalizado}   x2^${expoente1}`
+    console.log(binNormalizado);
+    
+
+
+  
+     console.log("sem ponto: " + num1);
+     var mantissaFracionada = num1.slice(1);
+    document.getElementById('exp').innerHTML = `O expoente real é ${expoente1}. Em formato de "excesso 127", 
+    adicione 127 ao expoente real: ${expoente1} + 127 = ${(numm(1).indexOf(".") - 1)+127}`
+     console.log("expoente: "+expoente1);
+     console.log("Adcione 127 ao expoente : "+((numm(1).indexOf(".") - 1)+127));
+     document.getElementById('expBin').innerHTML = `Expoente ${((numm(1).indexOf(".") - 1)+127)} em Binario: ${(expoente1+127).toString(2)}`
+    
+var bitSinal;
+document.getElementById('fracBinNorm').innerHTML = `A parte fracionada da forma normalizada: ${mantissaFracionada}`
+
+ var mantissa ;
+
+// console.log("Adcione zeros a esquerda caso a parte fracionada nao tiver 23 bits");
+
+if (mantissaFracionada.length == 23) {
+    
+   mantissa =  mantissaFracionada.substring(0,22)
+
+   
+   
+}
+else{
+ for (let i = mantissaFracionada.length; i < 23; i++) {
+     mantissaFracionada += "0"
+
+
+ }
+}
+ console.log("Adcionando zeros ate chegar a 23 bits:");
+
+ mantissa = mantissaFracionada
+document.getElementById('prencherComZeros').innerHTML = ` ${mantissa}`
+      
+ console.log(mantissa);
 
 
 
+ if ((valorDecimal + valorFracional)>0) {
+   console.log("Como o "+ (valorDecimal + valorFracional)+" é positivo o bit sinal é 0");
+    document.getElementById("bit").innerHTML = `Como o ${(valorDecimal + valorFracional)} é positivo o bit sinal é 0 `
+bitSinal = 0;
+ }else{
+    document.getElementById("bit").innerHTML = `Como o ${(valorDecimal + valorFracional)} é negativo o bit sinal é 1 `
+
+  bitSinal = 1;
+}
+
+
+calcIeee754 = bitSinal+" "+(expoente1+127).toString(2) +" "+ mantissa
+document.getElementById('resultadoIeee754').innerHTML= `${calcIeee754}`
+ 
+ console.log("Calculo ieee754 do valor 1: ");
+console.log(calcIeee754);
+
+clean()
+
+
+}
