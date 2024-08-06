@@ -1,5 +1,5 @@
 body{
-    background-color: rgb(19, 19, 19);
+    background-color: rgb(0, 0, 22);
     display: flex;
     justify-content: center;
 color: aliceblue;
@@ -26,17 +26,22 @@ input::placeholder{
 select{
     height: 30px;
     margin-inline: 2px;
+ cursor: pointer;
     width:30%;
 }
 .boxNumber{
     outline: 0;
  padding: 15px;
- border-radius: 10px;  
- border-color: bisque;
+ border-radius: 15px;  
+ border-color: rgb(65, 65, 65);
  border: 1px none solid;
- width: 80%;
- background-color: transparent;
- color: rgb(255, 255, 255);
+ width: 60%;
+ background-color: rgb(6, 6, 26) ;
+ color: rgb(124, 124, 124);
+}
+.boxNumber:focus{
+    width: 61%;
+    transition-duration: 0.2s;
 }
 .main{
     display: flex;
@@ -44,17 +49,22 @@ select{
    align-items: center;
 
     flex-direction: column;
-    width: 100%;
+    width: 80%;
 }
 .info{
+    
     display: none;
     width: 40%;
-    background-color: rgb(61, 61, 61);
+    background-color: rgb(25 25 39);
     height: 80%;
-    border-radius: 8px;
-    padding: 5px;
+    border-radius: 20px;
+    padding: 10px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
  overflow-y: auto;
+ 
+ -webkit-box-shadow: 0px 16px 28px -3px rgb(0, 0, 0);
+-moz-box-shadow: 0px 16px 28px -3px rgb(0, 0, 0);
+box-shadow: 0px 16px 28px -3px rgb(0, 0, 0);
 }
 ul{
  margin: 0px;
@@ -63,16 +73,18 @@ ul{
 .btnCalc{
     padding: 15px;  
     width: 40%;
-    
-    background-color: rgb(146, 146, 146);
-    color: black;   
+    border-radius: 15px;
+    background-color:rgb(6, 6, 26) ;
+    border-color: #3b3b3b;
+    color: rgb(177, 177, 177);   
     margin: 10px;
     cursor: pointer;
     font-size: 15px;
 }
 .btnCalc:hover{
-    background-color: rgb(143, 143, 143);
-width: 40.5%;
+
+    background-color: rgb(9, 9, 32) ;
+
 }
 .calcIeee754{
     display: flex;
@@ -96,11 +108,14 @@ width: 40.5%;
 .divInfoPassos{
     display: flex;
     flex-direction: column;
-    background-color: rgb(87, 86, 86);
-    padding: 8px;
+    background-color: rgb(45 47 54);
+    padding-inline: 10px;
     padding-bottom: 12px;
     margin: 3px;
-    border-radius: 4px;
+    border-radius: 20px;
+}.divInfoPassos span{
+    margin-top: 10px;
+    background-color: #45464b   ;
 }
 span{
     padding: 5px;
