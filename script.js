@@ -277,7 +277,8 @@ function calcIeee754(num) {  // Função calcular o ieee754 dos valores.
 
 
 // if else pra ver se o bit de sinal é 0
-    if ((valorDecimal + valorFracional) > 0) {
+if (num == 1) {
+  if ((valorDecimal + valorFracional) > 0) {
         console.log("Como o " + (valorDecimal + valorFracional) + " é positivo o bit sinal é 0");
         document.getElementById("bit").innerHTML = `Como o ${(valorDecimal + valorFracional)} é positivo o bit sinal é 0 `
         bitSinal = 0;
@@ -285,7 +286,20 @@ function calcIeee754(num) {  // Função calcular o ieee754 dos valores.
         document.getElementById("bit").innerHTML = `Como o ${(valorDecimal + valorFracional)} é negativo o bit sinal é 1 `
 
         bitSinal = 1;
-    }
+    }  
+}
+else{
+    if ((valorDecimal2 + valorFracional2) > 0) {
+        console.log("Como o " + (valorDecimal2 + valorFracional2) + " é positivo o bit sinal é 0");
+        document.getElementById("bit").innerHTML = `Como o ${(valorDecimal2 + valorFracional2)} é positivo o bit sinal é 0 `
+        bitSinal = 0;
+    } else {
+        document.getElementById("bit").innerHTML = `Como o ${(valorDecimal2 + valorFracional2)} é negativo o bit sinal é 1 `
+
+        bitSinal = 1;
+    }  
+}
+    
 //-------------------------------------------
 
 
