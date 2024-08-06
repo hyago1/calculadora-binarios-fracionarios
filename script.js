@@ -108,8 +108,6 @@ function numDecimal2(num) {
 function calcular() {
 
 
-
-
     if (numm(1) != "" || numm(2) != "") {
 
         var info = document.getElementById("info")
@@ -148,7 +146,7 @@ function calcular() {
         // document.getElementById("resultado").textContent = stringResultado 
         document.getElementById("resultado").textContent = `${stringResultado}`
         document.getElementById("resultadoDecimal").textContent = `Resultado - decimal: ${resultado}`
-calcIeee754N1()
+calcIeee754(1)
 
 
     } else {
@@ -160,157 +158,9 @@ calcIeee754N1()
 
 }
 
-function calcIeee754N1() {
-    var expoente1 = (numm(1).indexOf(".") - 1)
-    var expoente2 = (numm(2).indexOf(".") - 1)
-    var num1 = numm(1).replace('.', '')
-    console.log(num1);
-
-    document.getElementById("bin").innerHTML = `Binario: ${numm(1)}`
-    var binNormalizado = numm(1).charAt(0) + "." + num1.substring(1, num1.length)
-    document.getElementById("binNormalizado").innerHTML = `Binario Normalizado : ${binNormalizado}   x2^${expoente1}`
-    console.log(binNormalizado);
-
-
-
-
-    console.log("sem ponto: " + num1);
-    var mantissaFracionada = num1.slice(1);
-    document.getElementById('exp').innerHTML = `O expoente real é ${expoente1}. Em formato de "excesso 127", 
-    adicione 127 ao expoente real: ${expoente1} + 127 = ${(numm(1).indexOf(".") - 1) + 127}`
-    console.log("expoente: " + expoente1);
-    console.log("Adcione 127 ao expoente : " + ((numm(1).indexOf(".") - 1) + 127));
-    document.getElementById('expBin').innerHTML = `Expoente ${((numm(1).indexOf(".") - 1) + 127)} em Binario: ${(expoente1 + 127).toString(2)}`
-
-    var bitSinal;
-    document.getElementById('fracBinNorm').innerHTML = `A parte fracionada da forma normalizada: ${mantissaFracionada}`
-
-    var mantissa;
-
-    // console.log("Adcione zeros a esquerda caso a parte fracionada nao tiver 23 bits");
-
-    if (mantissaFracionada.length == 23) {
-
-        mantissa = mantissaFracionada.substring(0, 22)
-
-
-
-    }
-    else {
-        for (let i = mantissaFracionada.length; i < 23; i++) {
-            mantissaFracionada += "0"
-
-
-        }
-    }
-    console.log("Adcionando zeros ate chegar a 23 bits:");
-
-    mantissa = mantissaFracionada
-    document.getElementById('prencherComZeros').innerHTML = ` ${mantissa}`
-
-    console.log(mantissa);
-
-
-
-    if ((valorDecimal + valorFracional) > 0) {
-        console.log("Como o " + (valorDecimal + valorFracional) + " é positivo o bit sinal é 0");
-        document.getElementById("bit").innerHTML = `Como o ${(valorDecimal + valorFracional)} é positivo o bit sinal é 0 `
-        bitSinal = 0;
-    } else {
-        document.getElementById("bit").innerHTML = `Como o ${(valorDecimal + valorFracional)} é negativo o bit sinal é 1 `
-
-        bitSinal = 1;
-    }
-
-
-    ieee754N1 = bitSinal + " " + (expoente1 + 127).toString(2) + " " + mantissa
-    document.getElementById('resultadoIeee754').innerHTML = `${ieee754N1}`
-
-    console.log("Calculo ieee754 do valor 1: ");
-
-
-
-}
-
-
-function calcIeee754N2() {
-
-    var expoente1 = (numm(2).indexOf(".") - 1)
-    var num2 = numm(2).replace('.', '')
-    console.log(num2);
-
-    document.getElementById("bin").innerHTML = `Binario: ${numm(2)}`
-    var binNormalizado = numm(2).charAt(0) + "." + num2.substring(1, num2.length)
-    document.getElementById("binNormalizado").innerHTML = `Binario Normalizado : ${binNormalizado}   x2^${expoente1}`
-    console.log(binNormalizado);
-
-
-
-
-    console.log("sem ponto: " + num2);
-    var mantissaFracionada = num2.slice(1);
-    console.log("Mantissa "+mantissaFracionada);
-    
-    document.getElementById('exp').innerHTML = `O expoente real é ${expoente1}. Em formato de "excesso 127", 
-    adicione 127 ao expoente real: ${expoente1} + 127 = ${(numm(2).indexOf(".") - 1) + 127}`
-    console.log("expoente: " + expoente1);
-    console.log("Adcione 127 ao expoente : " + ((numm(2).indexOf(".") - 1) + 127));
-    document.getElementById('expBin').innerHTML = `Expoente ${((numm(2).indexOf(".") - 1) + 127)} em Binario: ${(expoente1 + 127).toString(2)}`
-
-    var bitSinal;
-    document.getElementById('fracBinNorm').innerHTML = `A parte fracionada da forma normalizada: ${mantissaFracionada}`
-
-    var mantissa;
-
-    // console.log("Adcione zeros a esquerda caso a parte fracionada nao tiver 23 bits");
-
-    if (mantissaFracionada.length == 23) {
-
-        mantissa = mantissaFracionada.substring(0, 22)
-
-
-
-    }
-    else {
-        for (let i = mantissaFracionada.length; i < 23; i++) {
-            mantissaFracionada += "0"
-
-
-        }
-    }
-    console.log("Adcionando zeros ate chegar a 23 bits:");
-
-    mantissa = mantissaFracionada
-    document.getElementById('prencherComZeros').innerHTML = ` ${mantissa}`
-
-    console.log(mantissa);
-
-
-
-    if ((valorDecimal2 + valorFracional2) > 0) {
-        console.log("Como o " + (valorDecimal2 + valorFracional2) + " é positivo o bit sinal é 0");
-        document.getElementById("bit").innerHTML = `Como o ${(valorDecimal2 + valorFracional2)} é positivo o bit sinal é 0 `
-        bitSinal = 0;
-    } else {
-        document.getElementById("bit").innerHTML = `Como o ${(valorDecimal2 + valorFracional2)} é negativo o bit sinal é 1 `
-
-        bitSinal = 1;
-    }
-
-
-    ieee754N2 = bitSinal + " " + (expoente1 + 127).toString(2) + " " + mantissa
-    document.getElementById('resultadoIeee754').innerHTML = `${ieee754N2}`
-
-    console.log("Calculo ieee754 do valor 1: ");
-
-
-
-
-}
-
 
 function calcIeee754Resultado() {
-var resul = resultado.toString(2)
+    var resul = resultado.toString(2)
     var expoente1 = (resul.indexOf(".") - 1)
     var numResul = resul.replace('.', '')
     console.log(numResul);
@@ -377,6 +227,73 @@ var resul = resultado.toString(2)
 
     console.log("Calculo ieee754 do valor 1: ");
 
+
+
+
+}
+
+function calcIeee754(num) {  // Função calcular o ieee754 dos valores.
+
+    var expoente = (numm(num).indexOf(".") - 1)  //Expoente pra normalizar o binario
+    var num1 = numm(num).replace('.', '')  //Retira o ponto
+
+
+    document.getElementById("bin").innerHTML = `Binario: ${numm(num)}`//Joga no html
+
+    var binNormalizado = numm(num).charAt(0) + "." + num1.substring(1, num1.length) // Cria o binario normalizado
+    document.getElementById("binNormalizado").innerHTML = `Binario Normalizado : ${binNormalizado}   x2^${expoente}`//joga no html
+
+
+    console.log(binNormalizado);
+    console.log("sem ponto: " + num1);
+    var mantissaFracionada = num1.slice(1);  // Pega a parte fracionada do binario
+    document.getElementById('exp').innerHTML = `O expoente real é ${expoente}. Em formato de "excesso 127", 
+    adicione 127 ao expoente real: ${expoente} + 127 = ${expoente + 127}`
+    document.getElementById('expBin').innerHTML = `Expoente ${((numm(num).indexOf(".") - 1) + 127)} em Binario: ${(expoente + 127).toString(2)}`
+
+    var bitSinal;
+    document.getElementById('fracBinNorm').innerHTML = `A parte fracionada da forma normalizada: ${mantissaFracionada}`
+
+    var mantissa;
+
+
+// if else pra ver se a mantissa tem 23 bit ----
+    if (mantissaFracionada.length == 23) { 
+        mantissa = mantissaFracionada.substring(0, 22)
+    }
+    else {
+        for (let i = mantissaFracionada.length; i < 23; i++) {
+            mantissaFracionada += "0"
+      }
+    }
+// --------------------------------------------
+
+
+
+    console.log("Adcionando zeros ate chegar a 23 bits:");
+
+    mantissa = mantissaFracionada 
+    document.getElementById('prencherComZeros').innerHTML = ` ${mantissa}` //joga no html
+
+
+// if else pra ver se o bit de sinal é 0
+    if ((valorDecimal + valorFracional) > 0) {
+        console.log("Como o " + (valorDecimal + valorFracional) + " é positivo o bit sinal é 0");
+        document.getElementById("bit").innerHTML = `Como o ${(valorDecimal + valorFracional)} é positivo o bit sinal é 0 `
+        bitSinal = 0;
+    } else {
+        document.getElementById("bit").innerHTML = `Como o ${(valorDecimal + valorFracional)} é negativo o bit sinal é 1 `
+
+        bitSinal = 1;
+    }
+//-------------------------------------------
+
+
+
+    ieee754N1 = bitSinal + " " + (expoente + 127).toString(2) + " " + mantissa // junta tudo e forma o ieee754 
+    document.getElementById('resultadoIeee754').innerHTML = `${ieee754N1}` // joga no html
+
+    console.log("Calculo ieee754 do valor 1: ");
 
 
 
