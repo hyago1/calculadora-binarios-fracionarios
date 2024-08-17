@@ -132,6 +132,7 @@ function calcular() {
              resultado = (valorDecimal + valorFracional) * (valorDecimal2 + valorFracional2)
         }
 
+        
         var stringResultado = resultado.toString(2)
  
         document.getElementById("resultado").textContent = `${stringResultado}`
@@ -147,6 +148,11 @@ function calcular() {
 function calcIeee754Resultado() {
     var resul = resultado.toString(2)
     var expoente1 = (resul.indexOf(".") - 1)
+
+    if (expoente1 == -2) {
+        expoente1 = resul.length -1
+    }
+    console.log("--------+espoente : "+expoente1);
     var numResul = resul.replace('.', '')
     console.log(numResul);
 
@@ -217,33 +223,60 @@ function calcIeee754Resultado() {
 
 }
 
-function calcIeee754(num) {  // Função calcular o ieee754 dos valores.
+function calcIeee754(num) { 
 
+// 1 passo normalizar numero
     var expoente = (numm(num).indexOf(".") - 1)  //Expoente pra normalizar o binario
     var num1 = numm(num).replace('.', '')  //Retira o ponto
+    var binNormalizado = numm(num).charAt(0) + "." + num1.substring(1, num1.length) // Cria o binario normalizado
 
 
     document.getElementById("bin").innerHTML = `Binario: ${numm(num)}`//Joga no html
-
-    var binNormalizado = numm(num).charAt(0) + "." + num1.substring(1, num1.length) // Cria o binario normalizado
     document.getElementById("binNormalizado").innerHTML = `Binario Normalizado : ${binNormalizado}   x2^${expoente}`//joga no html
 
+//2 passo Determinar bit de sinal
+var bitSinal;
+if (num == 1) {
 
-    console.log(binNormalizado);
-    console.log("sem ponto: " + num1);
-    var mantissaFracionada = num1.slice(1);  // Pega a parte fracionada do binario
+    if ((valorDecimal + valorFracional) > 0) {
+          console.log("Como o " + (valorDecimal + valorFracional) + " é positivo o bit sinal é 0");
+          document.getElementById("bit").innerHTML = `Como o ${(valorDecimal + valorFracional)} é positivo o bit sinal é 0 `
+          bitSinal = 0;
+      } else {
+          document.getElementById("bit").innerHTML = `Como o ${(valorDecimal + valorFracional)} é negativo o bit sinal é 1 `
+  
+          bitSinal = 1;
+      }  
+  }
+  else{
+      if ((valorDecimal2 + valorFracional2) > 0) {
+          console.log("Como o " + (valorDecimal2 + valorFracional2) + " é positivo o bit sinal é 0");
+          document.getElementById("bit").innerHTML = `Como o ${(valorDecimal2 + valorFracional2)} é positivo o bit sinal é 0 `
+          bitSinal = 0;
+      } else {
+          document.getElementById("bit").innerHTML = `Como o ${(valorDecimal2 + valorFracional2)} é negativo o bit sinal é 1 `
+  
+          bitSinal = 1;
+      }  
+  }    
+  //-----------------------------------------
+
+// 3 passo Calcular expoente
     document.getElementById('exp').innerHTML = `O expoente real é ${expoente}. Em formato de "excesso 127", 
     adicione 127 ao expoente real: ${expoente} + 127 = ${expoente + 127}`
     document.getElementById('expBin').innerHTML = `Expoente ${((numm(num).indexOf(".") - 1) + 127)} em Binario: ${(expoente + 127).toString(2)}`
-
-    var bitSinal;
-    document.getElementById('fracBinNorm').innerHTML = `A parte fracionada da forma normalizada: ${mantissaFracionada}`
-
-    var mantissa;
+ 
 
 
-// if else pra ver se a mantissa tem 23 bit ----
-    if (mantissaFracionada.length == 23) { 
+    
+
+
+var mantissaFracionada = num1.slice(1);  // Pega a parte fracionada do binario
+document.getElementById('fracBinNorm').innerHTML = `A parte fracionada da forma normalizada: ${mantissaFracionada}`
+
+var mantissa;
+// if else pra ver se a mantissa tem 23 bit 
+if (mantissaFracionada.length == 23) { 
         mantissa = mantissaFracionada.substring(0, 22)
     }
     else {
@@ -253,47 +286,11 @@ function calcIeee754(num) {  // Função calcular o ieee754 dos valores.
     }
 // --------------------------------------------
 
-
-
-    console.log("Adcionando zeros ate chegar a 23 bits:");
-
     mantissa = mantissaFracionada 
     document.getElementById('prencherComZeros').innerHTML = ` ${mantissa}` //joga no html
 
-
-// if else pra ver se o bit de sinal é 0
-if (num == 1) {
-  if ((valorDecimal + valorFracional) > 0) {
-        console.log("Como o " + (valorDecimal + valorFracional) + " é positivo o bit sinal é 0");
-        document.getElementById("bit").innerHTML = `Como o ${(valorDecimal + valorFracional)} é positivo o bit sinal é 0 `
-        bitSinal = 0;
-    } else {
-        document.getElementById("bit").innerHTML = `Como o ${(valorDecimal + valorFracional)} é negativo o bit sinal é 1 `
-
-        bitSinal = 1;
-    }  
-}
-else{
-    if ((valorDecimal2 + valorFracional2) > 0) {
-        console.log("Como o " + (valorDecimal2 + valorFracional2) + " é positivo o bit sinal é 0");
-        document.getElementById("bit").innerHTML = `Como o ${(valorDecimal2 + valorFracional2)} é positivo o bit sinal é 0 `
-        bitSinal = 0;
-    } else {
-        document.getElementById("bit").innerHTML = `Como o ${(valorDecimal2 + valorFracional2)} é negativo o bit sinal é 1 `
-
-        bitSinal = 1;
-    }  
-}
-    
-//-------------------------------------------
-
-
-
     ieee754N1 = bitSinal + " " + (expoente + 127).toString(2) + " " + mantissa // junta tudo e forma o ieee754 
     document.getElementById('resultadoIeee754').innerHTML = `${ieee754N1}` // joga no html
-
-    console.log("Calculo ieee754 do valor 1: ");
-
 
 
 }
