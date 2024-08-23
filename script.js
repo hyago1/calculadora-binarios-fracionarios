@@ -9,7 +9,9 @@ var valorFracional2B = 0;
 var resultado
 var ieee754N1;
 var ieee754N2;
-
+var num1;
+var num2;
+var op;
 function clean() {
     valorDecimal = 0;
     valorFracional = 0;
@@ -24,10 +26,10 @@ function clean() {
 function numm(num) {
     var value;
     if (num == 1) {
-        var num1 = document.getElementById("num1").value
+
         value = num1
     } else {
-        var num2 = document.getElementById("num2").value
+
         value = num2
     }
     return value;
@@ -97,50 +99,131 @@ function numDecimal2(num) {
     spanDec.textContent = "Valor 2 - decimal: " + calculo
 }
 
+function adcionaNumAoDisplay(num) {
+    var jatem = false
+    var display = document.getElementById("display")
+    if (num == "x") {
+
+        display.value = display.value.substring(0, display.value.length - 1)
+    } else if (num == ".") {
+        if (display.value.includes(".") == false) {
 
 
-function calcular() {
+            display.value += num;
 
-
-    if ((numm(1) != "" && numm(2) != "") && (numm(1).includes(".") && numm(2).includes("."))) {
-
-
-        var info = document.getElementById("info")
-        info.style.display = "block"
-        clean()
-
-        console.log("tem , " + numm(1).indexOf(","));
-        console.log(parseInt(numm(1)), 1);
-
-        calcDecimal(parseInt(numm(1)), 1) // chama a função passando o decimal em binario pra ela
-        calcDecimal(parseInt(numm(2)), 2) // chama a função passando o decimal em binario pra ela
-        calcFracional(numm(1).substring(numm(1).length, numm(1).indexOf(".") + 1), 1) // chama a função passando o fracinado em binario pra ela
-        calcFracional(numm(2).substring(numm(2).length, numm(2).indexOf(".") + 1), 2) // chama a função passando o fracinado em binario pra ela
-
-        console.log(numm(1).substring(numm(1).length, numm(1).indexOf(".") + 1));
-        console.log("d" + valorDecimal);
-        console.log("f" + valorFracional);
-        console.log((valorDecimal + valorFracional));
-        console.log((valorDecimal2 + valorFracional2));
-
-        let op = document.getElementById("op")
-        if (op.value == "somar") {
-            resultado = (valorDecimal + valorFracional) + (valorDecimal2 + valorFracional2)
-        } else if (op.value == "subtrair") {
-            resultado = (valorDecimal + valorFracional) - (valorDecimal2 + valorFracional2)
-        } else {
-            resultado = (valorDecimal + valorFracional) * (valorDecimal2 + valorFracional2)
         }
 
 
-        var stringResultado = resultado.toString(2)
-
-        document.getElementById("resultado").textContent = `${stringResultado}`
-        document.getElementById("resultadoDecimal").textContent = `Resultado - decimal: ${resultado}`
-        calcIeee754(1)
     } else {
-        alert("Digite os valores - Ex: 110.01")
+        display.value += num;
     }
+
+
+
+
+
+
+
+
+
+
+
+}
+
+function soma() {
+    var display = document.getElementById("display")
+    num1 = display.value;
+    display.value = ""
+    op = "somar"
+    numDecimal(num1)
+}
+
+function subtrair() {
+    var display = document.getElementById("display")
+    num1 = display.value;
+    display.value = ""
+    op = "subtrair"
+    numDecimal(num1)
+
+}
+function multiplicar() {
+    var display = document.getElementById("display")
+    num1 = display.value;
+    alert(num1)
+    display.value = ""
+    op = "multiplicar"
+    numDecimal(num1)
+
+}
+function dividir() {
+    var display = document.getElementById("display")
+    num1 = display.value;
+    alert(num1)
+    display.value = ""
+    op = "dividir"
+    numDecimal(num1)
+
+}
+
+function calcular() {
+    if (num1 != null) {
+        var display = document.getElementById("display")
+        num2 = display.value;
+        numDecimal2(num2)
+
+        if ((numm(1) != "" && numm(2) != "") && (numm(1).includes(".") && numm(2).includes("."))) {
+
+
+            var info = document.getElementById("info")
+            info.style.display = "block"
+            clean()
+
+            console.log("tem , " + numm(1).indexOf(","));
+            console.log(parseInt(numm(1)), 1);
+
+            calcDecimal(parseInt(numm(1)), 1) // chama a função passando o decimal em binario pra ela
+            calcDecimal(parseInt(numm(2)), 2) // chama a função passando o decimal em binario pra ela
+            calcFracional(numm(1).substring(numm(1).length, numm(1).indexOf(".") + 1), 1) // chama a função passando o fracinado em binario pra ela
+            calcFracional(numm(2).substring(numm(2).length, numm(2).indexOf(".") + 1), 2) // chama a função passando o fracinado em binario pra ela
+
+            console.log(numm(1).substring(numm(1).length, numm(1).indexOf(".") + 1));
+            console.log("d" + valorDecimal);
+            console.log("f" + valorFracional);
+            console.log((valorDecimal + valorFracional));
+            console.log((valorDecimal2 + valorFracional2));
+
+
+            if (op == "somar") {
+                resultado = (valorDecimal + valorFracional) + (valorDecimal2 + valorFracional2)
+            } else if (op == "subtrair") {
+                resultado = (valorDecimal + valorFracional) - (valorDecimal2 + valorFracional2)
+            } else if (op == "dividir") {
+                resultado = (valorDecimal + valorFracional) / (valorDecimal2 + valorFracional2)
+            } else {
+                resultado = (valorDecimal + valorFracional) * (valorDecimal2 + valorFracional2)
+            }
+
+
+            var stringResultado = resultado.toString(2)
+
+
+
+            var display = document.getElementById("display")
+            display.value = stringResultado
+
+            document.getElementById("resultado").textContent = `${stringResultado}`
+            document.getElementById("resultadoDecimal").textContent = `Resultado - decimal: ${resultado}`
+
+
+            calcIeee754(1)
+        } else {
+            alert("Digite os valores - Ex: 110.01")
+        }
+    }
+    else {
+        alert("Digite o segundo valor antes")
+    }
+
 
 }
 
