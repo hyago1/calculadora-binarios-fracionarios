@@ -134,6 +134,9 @@ function soma() {
     var display = document.getElementById("display")
     num1 = display.value;
     display.value = ""
+
+    document.getElementById('displayCalc').style.display = "flex"
+    document.getElementById('displayCalc').textContent  = num1 + " +"
     op = "somar"
     numDecimal(num1)
 }
@@ -142,6 +145,9 @@ function subtrair() {
     var display = document.getElementById("display")
     num1 = display.value;
     display.value = ""
+
+    document.getElementById('displayCalc').style.display = "flex"
+    document.getElementById('displayCalc').textContent  = num1 + " -"
     op = "subtrair"
     numDecimal(num1)
 
@@ -149,8 +155,10 @@ function subtrair() {
 function multiplicar() {
     var display = document.getElementById("display")
     num1 = display.value;
-    alert(num1)
     display.value = ""
+
+    document.getElementById('displayCalc').style.display = "flex"
+    document.getElementById('displayCalc').textContent  = num1 + " x"
     op = "multiplicar"
     numDecimal(num1)
 
@@ -158,17 +166,32 @@ function multiplicar() {
 function dividir() {
     var display = document.getElementById("display")
     num1 = display.value;
-    alert(num1)
     display.value = ""
+
+    document.getElementById('displayCalc').style.display = "flex"
+    document.getElementById('displayCalc').textContent  = num1 + " ÷"
     op = "dividir"
     numDecimal(num1)
 
 }
 
+
+function calcularNovamente() {
+    clean();
+    document.getElementById("display").value = ""
+    document.getElementById("displayCalc").style.display = "none"
+    document.getElementById('btns').style.display = "grid";
+    document.getElementById('info').style.display = "none";
+    document.getElementById('btnCalc').style.display = "flex";
+    document.getElementById('btnCalcNovamente').style.display = "none";
+}
+
 function calcular() {
     if (num1 != null) {
         var display = document.getElementById("display")
+        
         num2 = display.value;
+        document.getElementById('displayCalc').textContent  += " "+ num2 
         numDecimal2(num2)
 
         if ((numm(1) != "" && numm(2) != "") && (numm(1).includes(".") && numm(2).includes("."))) {
@@ -218,11 +241,21 @@ function calcular() {
             calcIeee754(1)
         } else {
             alert("Digite os valores - Ex: 110.01")
+
+            clean();
+            document.getElementById("display").value = ""
+            document.getElementById("displayCalc").style.display = "none"
         }
     }
     else {
         alert("Digite o segundo valor antes")
     }
+
+
+    document.getElementById('btns').style.display = "none";
+    document.getElementById('btnCalc').style.display = "none";
+    
+    document.getElementById('btnCalcNovamente').style.display = "flex";
 
 
 }
